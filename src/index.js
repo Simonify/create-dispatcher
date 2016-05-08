@@ -1,7 +1,13 @@
-export default function createDispatcher({ defaultChannel } = { defaultChannel: '*' }) {
+export const DEFAULT_CHANNEL = '*';
+
+export default function createDispatcher({ defaultChannel } = { defaultChannel: DEFAULT_CHANNEL }) {
   let subscribers = {};
 
   function subscribe(_channel, _receiver) {
+    if (subscribers === null) {
+      return false;
+    }
+
     let channel;
     let receiver;
 
