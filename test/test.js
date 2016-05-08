@@ -149,6 +149,33 @@ describe('create-dispatcher', () => {
         expect(unsubscribe()).toBe(false);
         expect(unsubscribe()).toBe(false);
       });
+
+      it('should not affect other subscriptions to the same channel', () => {
+        const { dispatch, subscribe } = createDispatcher();
+        const fn = (event) => null;
+        const spies = [createSpy(fn), createSpy(fn), createSpy(fn)];
+        const unsubscribes = spies.map((spy) => subscribe('channel', spy));
+        const event = { type: 'test' };
+
+        dispatch('channel', event);
+
+        spies.forEach((spy) => {
+          expect(spy).toHaveBeenCalledWith(event);
+          spy.reset();
+        });
+
+        expect(unsubscribes[1]()).toBe(true);
+
+        dispatch('channel', event);
+
+        expect(spies[0]).toHaveBeenCalledWith(event);
+        expect(spies[1]).toNotHaveBeenCalled();
+        expect(spies[2]).toHaveBeenCalledWith(event);
+
+        expect(unsubscribes[0]()).toBe(true);
+        expect(unsubscribes[1]()).toBe(false);
+        expect(unsubscribes[2]()).toBe(true);
+      });
     });
   });
 
