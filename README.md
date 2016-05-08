@@ -38,7 +38,7 @@ unsubscribeChannel();
 createDispatcher(options:Object) => Dispatcher
 ```
 
-The function accepts a single argument — an object which can contain a `defaultChannel` property that will be used when a channel is not specified in the `subscribe` and `dispatch` methods. This value defaults to `*`.
+The function accepts a single (optional) argument — an object which can contain a `defaultChannel` property that will be used when a channel is not specified in the `subscribe` and `dispatch` methods (defaults to `*`).
 
 The returned `Dispatcher` is an object exposing three methods:
 
