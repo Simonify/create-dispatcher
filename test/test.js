@@ -1,4 +1,4 @@
-import expect, { createSpy, spyOn, isSpy } from 'expect';
+import expect, { createSpy } from 'expect';
 import createDispatcher, { DEFAULT_CHANNEL } from '../src';
 
 describe('create-dispatcher', () => {
