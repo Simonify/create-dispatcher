@@ -1,0 +1,7 @@
+node_modules/
+lib/
+dist/
+es/
+example/lib
+example/node_modules
+npm-debug.log
