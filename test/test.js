@@ -94,15 +94,26 @@ describe('create-dispatcher', () => {
     });
 
     it('must only accept a string as a channel, if provided', () => {
-      const { dispatch } = createDispatcher();
+      const { subscribe } = createDispatcher();
       const fn = () => {};
 
-      expect(() => dispatch(123, fn)).toThrow(/must be a string/);
-      expect(() => dispatch(false, fn)).toThrow(/must be a string/);
-      expect(() => dispatch({}, fn)).toThrow(/must be a string/);
-      expect(() => dispatch(undefined, fn)).toThrow(/must be a string/);
-      expect(() => dispatch(null, fn)).toThrow(/must be a string/);
-      expect(() => dispatch('hello', fn)).toNotThrow(/must be a string/);
+      expect(() => subscribe(123, fn)).toThrow(/must be a string/);
+      expect(() => subscribe(false, fn)).toThrow(/must be a string/);
+      expect(() => subscribe({}, fn)).toThrow(/must be a string/);
+      expect(() => subscribe(undefined, fn)).toThrow(/must be a string/);
+      expect(() => subscribe(null, fn)).toThrow(/must be a string/);
+      expect(() => subscribe('hello', fn)).toNotThrow(/must be a string/);
+    });
+
+    it('must only accept a function as the receiver', () => {
+      const { subscribe } = createDispatcher();
+
+      expect(() => subscribe(null)).toThrow(/`receiver` must be a function/);
+      expect(() => subscribe(false)).toThrow(/`receiver` must be a function/);
+      expect(() => subscribe({})).toThrow(/`receiver` must be a function/);
+      expect(() => subscribe(undefined)).toThrow(/`receiver` must be a function/);
+      expect(() => subscribe(null)).toThrow(/`receiver` must be a function/);
+      expect(() => subscribe(() => {})).toNotThrow(/`receiver` must be a function/);
     });
 
     describe('receiver', () => {
