@@ -55,7 +55,7 @@ Dispatcher.dispatch(event:?) => Boolean
 
 The `subscribe` method can be provided with one or two arguments. If two arguments are provided, the first argument will be treated as a `channel` to subscribe to and the second will be treated as the `receiver` function. If one argument is provided, it will be treated as the `receiver` function and the `channel` will default to the `defaultChannel`.
 
-The function will return an `unsubscribe` function which can be executed to cancel the subscription. The function will return a `true` the first time it's called and `false` thereafter.
+The function will return an `unsubscribe` function which can be called to cancel the subscription — it will return `true` the first time it's called and `false` thereafter.
 
 ```js
 Dispatcher.subscribe(channel:String, receiver:Function) => unsubscribe:Function
