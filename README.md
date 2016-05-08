@@ -66,7 +66,7 @@ The `receiver` argument will be called whenever an event is dispatched to the ch
 
 ### Dispatcher.destroy
 
-The `destroy` method can be used to untrack all subscriptions and prevent new ones. I recommend you try not to use this method and instead just cancel any subscriptions you create (using the returned `unsubscribe` function). The function will return a `true` the first time it's called and `false` thereafter.
+The `destroy` method can be used to untrack all subscriptions and prevent new ones. I recommend you try not to use this method and instead just cancel any subscriptions you create (using the returned `unsubscribe` function). The function will return `true` the first time it's called and `false` thereafter.
 
 ```js
 Dispatcher.destroy() => Boolean
