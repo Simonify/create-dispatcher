@@ -2,7 +2,7 @@
 
 `create-dispatcher` provides a simple, minimal event dispatcher.
 
-[![build status](https://img.shields.io/travis/simonify/create-dispatcher/master.svg)](https://travis-ci.org/Simonify/create-dispatcher)
+[![build status](https://img.shields.io/travis/simonify/create-dispatcher/master.svg)](https://travis-ci.org/simonify/create-dispatcher)
 [![npm version](https://img.shields.io/npm/v/create-dispatcher.svg)](https://www.npmjs.com/package/create-dispatcher)
 [![npm downloads](https://img.shields.io/npm/dm/create-dispatcher.svg)](https://www.npmjs.com/package/create-dispatcher)
 
