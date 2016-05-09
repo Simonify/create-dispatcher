@@ -2,9 +2,9 @@
 
 `create-dispatcher` provides a simple, minimal event dispatcher.
 
-[![build status](https://img.shields.io/travis/simonify/create-dispatcher/master.svg?style=flat-square)](https://travis-ci.org/reactjs/simonify/create-dispatcher)
-[![npm version](https://img.shields.io/npm/v/create-dispatcher.svg?style=flat-square)](https://www.npmjs.com/package/create-dispatcher)
-[![npm downloads](https://img.shields.io/npm/dm/create-dispatcher.svg?style=flat-square)](https://www.npmjs.com/package/create-dispatcher)
+[![build status](https://img.shields.io/travis/Simonify/create-dispatcher/master.svg)](https://travis-ci.org/Simonify/create-dispatcher)
+[![npm version](https://img.shields.io/npm/v/create-dispatcher.svg)](https://www.npmjs.com/package/create-dispatcher)
+[![npm downloads](https://img.shields.io/npm/dm/create-dispatcher.svg)](https://www.npmjs.com/package/create-dispatcher)
 
 ## Install
 ```bash
