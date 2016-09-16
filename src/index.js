@@ -50,6 +50,16 @@ export default function createDispatcher({ defaultChannel } = { defaultChannel: 
     };
   }
 
+  function dispatchTo(_subscribers, channel, event) {
+    for (const subscriber of _subscribers) {
+      if (subscriber.length === 1) {
+        subscriber(event);
+      } else {
+        subscriber(channel, event);
+      }
+    }
+  }
+
   function dispatch(channel, event) {
     if (subscribers === null) {
       return false;
@@ -63,16 +73,12 @@ export default function createDispatcher({ defaultChannel } = { defaultChannel: 
       throw new Error('`channel` must be a string');
     }
 
-    if (!subscribers[channel]) {
-      return true;
+    if (subscribers[channel]) {
+      dispatchTo(subscribers[channel], channel, event);
     }
 
-    for (const subscriber of subscribers[channel]) {
-      if (subscriber.length === 1) {
-        subscriber(event);
-      } else {
-        subscriber(channel, event);
-      }
+    if (subscribers[DEFAULT_CHANNEL]) {
+      dispatchTo(subscribers[DEFAULT_CHANNEL], channel, event);
     }
 
     return true;

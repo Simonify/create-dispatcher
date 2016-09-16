@@ -149,6 +149,23 @@ describe('create-dispatcher', () => {
 
         expect(unsubscribe()).toBe(true);
       });
+
+      it('should receive all events when no channel is specified', () => {
+        const { dispatch, subscribe } = createDispatcher();
+        const spy = createSpy((event) => null);
+        const unsubscribe = subscribe(spy);
+
+        dispatch('channel', { hello: 'world' });
+        expect(spy).toHaveBeenCalledWith({ hello: 'world' });
+        unsubscribe();
+
+        const spy2 = createSpy((channel, event) => null);
+        const unsubscribe2 = subscribe(spy2);
+
+        dispatch('channel', { hello: 'world' });
+        expect(spy2).toHaveBeenCalledWith('channel', { hello: 'world' });
+        unsubscribe2();
+      });
     });
 
     describe('#unsubscribe', () => {
