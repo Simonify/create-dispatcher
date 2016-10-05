@@ -77,8 +77,8 @@ export default function createDispatcher({ defaultChannel } = { defaultChannel: 
       dispatchTo(subscribers[channel], channel, event);
     }
 
-    if (subscribers[DEFAULT_CHANNEL]) {
-      dispatchTo(subscribers[DEFAULT_CHANNEL], channel, event);
+    if (channel !== defaultChannel && subscribers[defaultChannel]) {
+      dispatchTo(subscribers[defaultChannel], channel, event);
     }
 
     return true;
