@@ -52,7 +52,7 @@ export default function createDispatcher({ defaultChannel } = { defaultChannel: 
 
   function dispatchTo(_subscribers, channel, event) {
     for (const subscriber of _subscribers) {
-      if (subscriber.length === 1) {
+      if (subscriber.length <= 1) {
         subscriber(event);
       } else {
         subscriber(channel, event);

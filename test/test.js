@@ -169,12 +169,19 @@ describe('create-dispatcher', () => {
 
       it('should only be called once when subscribing and dispatching to the global channel', () => {
         const { dispatch, subscribe } = createDispatcher();
-        const spy = createSpy((event) => null);
-        const unsubscribe = subscribe(spy);
+        const spyArg = createSpy((event) => null);
+        const unsubscribe = subscribe(spyArg);
 
         dispatch({ hello: 'world' });
-        expect(spy.calls.length).toBe(1);
+        expect(spyArg.calls.length).toBe(1);
         unsubscribe();
+
+        const spyArgless = createSpy();
+        const unsubscribeArgless = subscribe(spyArgless);
+
+        dispatch({ hello: 'world' });
+        expect(spyArgless.calls.length).toBe(1);
+        unsubscribeArgless();
       });
     });
 
