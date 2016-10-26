@@ -150,21 +150,26 @@ describe('create-dispatcher', () => {
         expect(unsubscribe()).toBe(true);
       });
 
-      it('should receive all events when no channel is specified', () => {
+      it('should receive all events when no channel is specified and the receiver takes two arguments', () => {
+        const { dispatch, subscribe } = createDispatcher();
+        const spy = createSpy((channel, event) => null);
+        const unsubscribe = subscribe(spy);
+
+        dispatch('channel', { hello: 'world' });
+        expect(spy).toHaveBeenCalledWith('channel', { hello: 'world' });
+        unsubscribe();
+      });
+
+      it('should receive non-channel events when no channel is specified and the receiver takes one argument', () => {
         const { dispatch, subscribe } = createDispatcher();
         const spy = createSpy((event) => null);
         const unsubscribe = subscribe(spy);
 
         dispatch('channel', { hello: 'world' });
-        expect(spy).toHaveBeenCalledWith({ hello: 'world' });
+        expect(spy.calls.length).toBe(0);
+        dispatch({ hello: 'world' });
+        expect(spy.calls.length).toBe(1);
         unsubscribe();
-
-        const spy2 = createSpy((channel, event) => null);
-        const unsubscribe2 = subscribe(spy2);
-
-        dispatch('channel', { hello: 'world' });
-        expect(spy2).toHaveBeenCalledWith('channel', { hello: 'world' });
-        unsubscribe2();
       });
 
       it('should only be called once when subscribing and dispatching to the global channel', () => {

@@ -78,7 +78,7 @@ export default function createDispatcher({ defaultChannel } = { defaultChannel: 
     }
 
     if (channel !== defaultChannel && subscribers[defaultChannel]) {
-      dispatchTo(subscribers[defaultChannel], channel, event);
+      dispatchTo(subscribers[defaultChannel].filter(fn => fn.length === 2), channel, event);
     }
 
     return true;

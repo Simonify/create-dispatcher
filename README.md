@@ -57,7 +57,11 @@ Dispatcher.dispatch(event:?) => Boolean
 
 ### Dispatcher.subscribe
 
-The `subscribe` method can be provided with one or two arguments. If two arguments are provided, the first argument will be treated as a `channel` to subscribe to and the second will be treated as the `receiver` function. If one argument is provided, it will be treated as the `receiver` function and the `channel` will default to the `defaultChannel`.
+The `subscribe` method can be called with one or two arguments.
+
+If the method is called with two arguments, the first argument will be treated as a `channel` to subscribe to and the second will be treated as a `receiver` function. The `receiver` will be called with the signature of `(channel: String, event: ?)` whenever an event is dispatched to the `channel`.
+
+If one argument is provided, it will be treated as a `receiver` function. If the `receiver` function accepts two arguments (`(channel: String, event: ?)`), it will be called whenever an event is dispatched to any channel. If it only accepts one argument, it will only be called when events are dispatched to the `defaultChannel`.
 
 If the subscription is successful, the function will return an `unsubscribe` function which can be called to cancel the subscription — it will return `true` the first time it's called and `false` thereafter. If the subscription is *not* successful (i.e. you've called `destroy`), the function will return `false`.
 
@@ -65,8 +69,6 @@ If the subscription is successful, the function will return an `unsubscribe` fun
 Dispatcher.subscribe(channel:String, receiver:Function) => unsubscribe:Function|Boolean
 Dispatcher.subscribe(receiver:Function) => unsubscribe:Function|Boolean
 ```
-
-The `receiver` argument will be called whenever an event is dispatched to the channel you are subscribing to. The `receiver` function you provide should accept either one or two arguments. If one argument is accepted, it will be the `event`. If two arguments are accepted, the first will be the `channel` and the second will be the `event` (see Usage section).
 
 ### Dispatcher.destroy
 
